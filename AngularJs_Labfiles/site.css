@@ -1,0 +1,9 @@
+﻿body {
+    background-color: #C6D9F1;
+}
+
+.fixed-panel {
+    min-height: 100px;
+    max-height: 250px;
+    overflow-y: scroll;
+}

@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html ng-app="productManager">
+<head  >
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+    <!--<style type="text/css">
+        .fixed-panel {
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+    </style>-->
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+
+
+    <script src="app/common.service/common.services.js"></script>
+    <script src="app/common.service/productResource.js"></script>
+    <script src="app/app.js"></script>
+
+</head>
+<body ng-controller="ProductController as vm">
+    <br/>
+
+    <div class="container" >
+        <div class="row">
+            <form class="form-horizontal" name="productView" novalidate role="form">
+                <fieldset>
+                    <legend>Product Information : {{vm.message}}</legend>
+                    <div class="form-group">
+                        <label for="productName" class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="productName" name="productName" class="form-control" required ng-model="vm.product.Name"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productName" class="col-sm-3 control-label">Price</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="productName" name="productName" class="form-control" ng-model="vm.product.Price" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="department" class="col-sm-3 control-label">Category</label>
+                        <div class="col-sm-9">
+                            <select name="department" id="department" class="form-control"
+                                    ng-model="vm.category"
+                                    ng-options="category for category in vm.categories" ng-required="true"></select>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input type="button" class="btn btn-default" value="Cancel"
+                           ng-click="vm.cancelForm()" />
+                    <input type="submit" class="btn btn-primary" value="Submit"
+                           ng-click="vm.submitForm()" />
+                    <input type="reset" class="btn btn-warning" value="Reset"
+                           ng-click="resetForm()" />
+                    <input type="search" class="btn btn-default" value="Search"
+                           ng-click="vm.search()" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br/>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Product List</h4>
+                <div class="row">
+                    <div class="col-sm-03 col-lg-offset-9 input-group">
+                        <input type="text" class="form-control" placeholder="serach by product name" ng-model="searchText">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body fixed-panel">
+                <table class="table table-fixed">
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Category</td>
+                            <td>Price</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="product in vm.products| filter:{Name:searchText}">
+                            <td>{{product.Name}}</td>
+                            <td>{{product.Category}}</td>
+                            <td>{{product.Price}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
